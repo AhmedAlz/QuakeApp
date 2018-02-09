@@ -7,21 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		348F235F15F94015242B3018 /* Pods_QuakeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3634DBD2929F994D089B123 /* Pods_QuakeApp.framework */; };
 		E21A271E202D289500885FC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21A271D202D289500885FC9 /* AppDelegate.swift */; };
-		E21A2720202D289500885FC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21A271F202D289500885FC9 /* ViewController.swift */; };
+		E21A2720202D289500885FC9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21A271F202D289500885FC9 /* Settings.swift */; };
 		E21A2723202D289500885FC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E21A2721202D289500885FC9 /* Main.storyboard */; };
 		E21A2725202D289500885FC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E21A2724202D289500885FC9 /* Assets.xcassets */; };
 		E21A2728202D289500885FC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E21A2726202D289500885FC9 /* LaunchScreen.storyboard */; };
+		E21A2730202DBEBD00885FC9 /* UpdateAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21A272F202DBEBD00885FC9 /* UpdateAddress.swift */; };
+		E21A2732202DBEE600885FC9 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21A2731202DBEE600885FC9 /* WelcomeVC.swift */; };
+		E21A2734202DBFB300885FC9 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21A2733202DBFB300885FC9 /* MainVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9FD5036B1829A2096566440D /* Pods-QuakeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuakeApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuakeApp/Pods-QuakeApp.debug.xcconfig"; sourceTree = "<group>"; };
+		B3634DBD2929F994D089B123 /* Pods_QuakeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuakeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBF765678873FCD337391BB8 /* Pods-QuakeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuakeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuakeApp/Pods-QuakeApp.release.xcconfig"; sourceTree = "<group>"; };
 		E21A271A202D289500885FC9 /* QuakeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuakeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21A271D202D289500885FC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E21A271F202D289500885FC9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E21A271F202D289500885FC9 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E21A2722202D289500885FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E21A2724202D289500885FC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E21A2727202D289500885FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E21A2729202D289500885FC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E21A272F202DBEBD00885FC9 /* UpdateAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAddress.swift; sourceTree = "<group>"; };
+		E21A2731202DBEE600885FC9 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
+		E21A2733202DBFB300885FC9 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +39,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				348F235F15F94015242B3018 /* Pods_QuakeApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D6DE55477B2C95D653925B2F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B3634DBD2929F994D089B123 /* Pods_QuakeApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E21A2711202D289500885FC9 = {
 			isa = PBXGroup;
 			children = (
 				E21A271C202D289500885FC9 /* QuakeApp */,
 				E21A271B202D289500885FC9 /* Products */,
+				EC12C86B11D6C9AEFEBCDA97 /* Pods */,
+				D6DE55477B2C95D653925B2F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +76,25 @@
 			isa = PBXGroup;
 			children = (
 				E21A271D202D289500885FC9 /* AppDelegate.swift */,
-				E21A271F202D289500885FC9 /* ViewController.swift */,
+				E21A271F202D289500885FC9 /* Settings.swift */,
 				E21A2721202D289500885FC9 /* Main.storyboard */,
 				E21A2724202D289500885FC9 /* Assets.xcassets */,
 				E21A2726202D289500885FC9 /* LaunchScreen.storyboard */,
 				E21A2729202D289500885FC9 /* Info.plist */,
+				E21A272F202DBEBD00885FC9 /* UpdateAddress.swift */,
+				E21A2731202DBEE600885FC9 /* WelcomeVC.swift */,
+				E21A2733202DBFB300885FC9 /* MainVC.swift */,
 			);
 			path = QuakeApp;
+			sourceTree = "<group>";
+		};
+		EC12C86B11D6C9AEFEBCDA97 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9FD5036B1829A2096566440D /* Pods-QuakeApp.debug.xcconfig */,
+				CBF765678873FCD337391BB8 /* Pods-QuakeApp.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +104,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E21A272C202D289500885FC9 /* Build configuration list for PBXNativeTarget "QuakeApp" */;
 			buildPhases = (
+				7D4B931C5D0A13216572C83E /* [CP] Check Pods Manifest.lock */,
 				E21A2716202D289500885FC9 /* Sources */,
 				E21A2717202D289500885FC9 /* Frameworks */,
 				E21A2718202D289500885FC9 /* Resources */,
+				2930106BD14BD3CAD68BDB26 /* [CP] Embed Pods Frameworks */,
+				19B5A0E70ECE1A563D18866C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,12 +167,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		19B5A0E70ECE1A563D18866C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QuakeApp/Pods-QuakeApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2930106BD14BD3CAD68BDB26 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-QuakeApp/Pods-QuakeApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kronos/Kronos.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kronos.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QuakeApp/Pods-QuakeApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7D4B931C5D0A13216572C83E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuakeApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E21A2716202D289500885FC9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E21A2720202D289500885FC9 /* ViewController.swift in Sources */,
+				E21A2730202DBEBD00885FC9 /* UpdateAddress.swift in Sources */,
+				E21A2734202DBFB300885FC9 /* MainVC.swift in Sources */,
+				E21A2720202D289500885FC9 /* Settings.swift in Sources */,
+				E21A2732202DBEE600885FC9 /* WelcomeVC.swift in Sources */,
 				E21A271E202D289500885FC9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +365,7 @@
 		};
 		E21A272D202D289500885FC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FD5036B1829A2096566440D /* Pods-QuakeApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -287,6 +381,7 @@
 		};
 		E21A272E202D289500885FC9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBF765678873FCD337391BB8 /* Pods-QuakeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
