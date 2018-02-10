@@ -16,12 +16,9 @@ class WelcomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         if let _ = userDefaults.string(forKey: "email") {
-            
         
         } else {
-            
             //to check if user put the address
             userDefaults.set("no", forKey: "isAddressSet")
             // the address

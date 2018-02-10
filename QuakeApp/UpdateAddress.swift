@@ -18,9 +18,19 @@ class UpdateAddress: UIViewController {
     @IBOutlet weak var floor: UITextField!
     
     override func viewDidLoad() {
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         super.viewDidLoad()
 
     }
+    
+    
+    @objc func dismissKeyboard() {
+            view.endEditing(true)
+    }
+    
     
     
     @IBAction func apply(_ sender: Any) {

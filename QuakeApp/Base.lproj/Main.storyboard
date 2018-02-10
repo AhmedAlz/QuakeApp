@@ -140,6 +140,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="VgD-n3-CnA"/>
                     </view>
+                    <connections>
+                        <outlet property="address" destination="usC-0w-EKL" id="kjI-yG-b4Q"/>
+                        <outlet property="readings" destination="dax-5a-927" id="EfX-1m-Kyg"/>
+                        <outlet property="settings" destination="zBV-Dg-yTF" id="JNw-Sj-pEQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hIb-nN-OYk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
