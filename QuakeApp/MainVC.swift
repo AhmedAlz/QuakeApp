@@ -75,15 +75,16 @@ class MainVC: UIViewController {
         var t = [Any]()
         
         var now = Clock.now?.timeIntervalSince1970 ?? 0.0
+        print(now)
         if manager.isAccelerometerAvailable {
             manager.accelerometerUpdateInterval = samplingRate
             manager.startAccelerometerUpdates(to: OperationQueue.main) {
                 [weak self] data, error in
                 now = now + self!.samplingRate
                 
-                self!.readings.text = "x: \(data!.acceleration.x * 9.80665)\ny: \(data!.acceleration.y * 9.80665) \nz: \(data!.acceleration.z * 9.80665) \n time: \(now)"
+                self!.readings.text = "x: \((data!.acceleration.x * 9.80665 * 100.0).rounded()/100)\ny: \((data!.acceleration.y * 9.80665 * 100).rounded()/100.0) \nz: \((data!.acceleration.z * 9.80665 * 100.0).rounded()/100) \n time: \(now)"
                 
-                if abs(data!.acceleration.z * 9.80665) > 8 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self?.threshold)!)  {
+                if abs(data!.acceleration.z * 9.80665) > 8.0 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self?.threshold)!)  {
                     self?.startRecording = true
                 }
                 
