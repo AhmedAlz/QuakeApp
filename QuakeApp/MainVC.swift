@@ -28,7 +28,7 @@ class MainVC: UIViewController {
     var duration : Double = 10
     var counter : Double = 1
     var startRecording = false
-    let samplingRate : Double = 1/300.0
+    let samplingRate : Double = 1/200.0
     let url = "http://ec2-54-153-50-104.us-west-1.compute.amazonaws.com/api"
     
     
@@ -81,9 +81,9 @@ class MainVC: UIViewController {
                 [weak self] data, error in
                 now = now + self!.samplingRate
                 
-                self!.readings.text = "x: \(data!.acceleration.x * 10)\ny: \(data!.acceleration.y * 10) \nz: \(data!.acceleration.z * 10) \n time: \(now)"
+                self!.readings.text = "x: \(data!.acceleration.x * 9.80665)\ny: \(data!.acceleration.y * 9.80665) \nz: \(data!.acceleration.z * 9.80665) \n time: \(now)"
                 
-                if abs(data!.acceleration.z * 10) > 8 && sqrt(pow(data!.acceleration.x * 10,2) + pow(data!.acceleration.y * 10,2)) > Double((self?.threshold)!)  {
+                if abs(data!.acceleration.z * 9.80665) > 8 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self?.threshold)!)  {
                     self?.startRecording = true
                 }
                 
@@ -96,9 +96,9 @@ class MainVC: UIViewController {
                     
                     self!.counter = self!.counter + 1
                     if self!.counter < self!.duration * (1/self!.samplingRate ) {
-                        x.append(data!.acceleration.x * 10)
-                        y.append(data!.acceleration.y * 10)
-                        z.append(data!.acceleration.z * 10)
+                        x.append(data!.acceleration.x * 9.80665)
+                        y.append(data!.acceleration.y * 9.80665)
+                        z.append(data!.acceleration.z * 9.80665)
                         t.append(now)
                         
                     } else{
@@ -107,6 +107,7 @@ class MainVC: UIViewController {
                         Alamofire.request(self!.url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
                             .downloadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
                                 print("Progress: \(progress.fractionCompleted)")
+                                print(now)
                         }
                         
                         self!.counter  = 1
