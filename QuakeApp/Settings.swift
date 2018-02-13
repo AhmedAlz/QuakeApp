@@ -23,7 +23,7 @@ class Settings: UIViewController {
     
     
     @IBAction func apply(_ sender: UIButton) {
-
+        print("settings updated")
         // settings
         userDefaults.set(Float(thresholdInput.text!), forKey: "threshold")
         userDefaults.set(Float(DurationInput.text!), forKey: "duration")

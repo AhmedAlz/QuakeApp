@@ -34,7 +34,7 @@ class UpdateAddress: UIViewController {
     
     
     @IBAction func apply(_ sender: Any) {
-        print("adress set")
+        print("adress updated")
         //to check if user put the address
         userDefaults.set("yes", forKey: "isAddressSet")
         // the address

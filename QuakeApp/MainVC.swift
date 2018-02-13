@@ -28,7 +28,7 @@ class MainVC: UIViewController {
     var duration : Double = 10
     var counter : Double = 1
     var startRecording = false
-    let samplingRate : Double = 1/200.0
+    let samplingRate : Double = 1/100.0
     let url = "http://ec2-54-153-50-104.us-west-1.compute.amazonaws.com/api"
     
     
@@ -60,7 +60,9 @@ class MainVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        self.address.text = " Email : \(userDefaults.string(forKey: "email")!) \n Building Number: \(userDefaults.string(forKey: "buildingNumber")!)\n Street Name: \(userDefaults.string(forKey: "streetName")!)\n Zip Code \(userDefaults.string(forKey: "zipCode")!)\n Floor \(userDefaults.integer(forKey: "floor"))"
         
+        self.settings.text = " Threshould = \((threshold * 100.0).rounded()/100)  m/s^2 \n Duration = \((duration * 100.0).rounded()/100) seconds"
         
         
         self.startupdate()
@@ -74,8 +76,12 @@ class MainVC: UIViewController {
         var z = [Any]()
         var t = [Any]()
         
-        var now = Clock.now?.timeIntervalSince1970 ?? 0.0
+//        var date = NSDate()
+        var now = NSDate().timeIntervalSince1970
         print(now)
+
+//        var now = Clock.now?.timeIntervalSince1970 ?? 0.0
+//        print(now)
         if manager.isAccelerometerAvailable {
             manager.accelerometerUpdateInterval = samplingRate
             manager.startAccelerometerUpdates(to: OperationQueue.main) {
@@ -90,9 +96,13 @@ class MainVC: UIViewController {
                 
                 if self!.startRecording {
                     if self!.counter == 1 {
-                        now = Clock.now?.timeIntervalSince1970 ?? 0.0
-                    } else if self!.counter ==  self!.duration * (1/self!.samplingRate ) - 1.0 {
-                        now = Clock.now?.timeIntervalSince1970 ?? 0.0
+                        now = NSDate().timeIntervalSince1970
+                        print(now)
+                        print("start")
+                    } else if self!.counter ==  (self!.duration * (1/self!.samplingRate )) - 2.0 {
+                        now = NSDate().timeIntervalSince1970
+                        print(now)
+                        print("end")
                     }
                     
                     self!.counter = self!.counter + 1
@@ -109,6 +119,8 @@ class MainVC: UIViewController {
                             .downloadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
                                 print("Progress: \(progress.fractionCompleted)")
                                 print(now)
+                                print("sent")
+                                
                         }
                         
                         self!.counter  = 1
