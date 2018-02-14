@@ -75,9 +75,10 @@ class MainVC: UIViewController {
         var y = [Any]()
         var z = [Any]()
         var t = [Any]()
+        var readings = [Any]()
         
 //        var date = NSDate()
-        var now = NSDate().timeIntervalSince1970
+        var now  = NSDate().timeIntervalSince1970 ?? 0.0
         print(now)
 
 //        var now = Clock.now?.timeIntervalSince1970 ?? 0.0
@@ -113,7 +114,8 @@ class MainVC: UIViewController {
                         t.append(now)
                         
                     } else{
-                        let parameters: Parameters = ["deviceID": self!.emailAddress , "buildingNumber" : self!.buildingNumber ,"streetName" : self!.streetName ,"zipCode" : self!.zipCode ,"floor" : self!.floor, "x": x , "y": y , "z": z, "rtime": t]
+                        let readings = [  "x": x , "y": y , "z": z, "rtime": t]
+                        let parameters: Parameters = ["deviceID": self!.emailAddress , "buildingNumber" : self!.buildingNumber ,"streetName" : self!.streetName ,"zipCode" : self!.zipCode ,"floor" : self!.floor, "x": x , "y": y , "z": z, "rtime": t, "reading" : readings]
                         
                         Alamofire.request(self!.url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
                             .downloadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
