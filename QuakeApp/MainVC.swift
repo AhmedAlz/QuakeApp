@@ -91,7 +91,7 @@ class MainVC: UIViewController {
                 
                 self!.readings.text = "x: \((data!.acceleration.x * 9.80665 * 100.0).rounded()/100)\ny: \((data!.acceleration.y * 9.80665 * 100).rounded()/100.0) \nz: \((data!.acceleration.z * 9.80665 * 100.0).rounded()/100) \n time: \(now)"
                 
-                if abs(data!.acceleration.z * 9.80665) > 8.0 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self?.threshold)!)  {
+                if abs(data!.acceleration.z * 9.80665) > 8.0 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self?.threshold)!) && self!.counter == 1  {
                     self?.startRecording = true
                 }
                 
@@ -113,7 +113,7 @@ class MainVC: UIViewController {
                         z.append(data!.acceleration.z * 9.80665)
                         t.append(now)
                         
-                    } else{
+                    } else if self!.counter == self!.duration * (1/self!.samplingRate )  {
                         let readings = [  "x": x , "y": y , "z": z, "rtime": t]
                         let parameters: Parameters = ["deviceID": self!.emailAddress , "buildingNumber" : self!.buildingNumber ,"streetName" : self!.streetName ,"zipCode" : self!.zipCode ,"floor" : self!.floor, "x": x , "y": y , "z": z, "rtime": t, "reading" : readings]
                         
