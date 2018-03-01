@@ -31,7 +31,7 @@ class WelcomeVC: UIViewController {
              userDefaults.set(0.6, forKey: "threshold")
              userDefaults.set(10.0, forKey: "duration")
     }
-        Address.text = "Email : \(userDefaults.string(forKey: "email")!) \n Building Number: \(userDefaults.string(forKey: "buildingNumber")!)\n Street Name: \(userDefaults.string(forKey: "streetName")!)\n Zip Code \(userDefaults.string(forKey: "zipCode")!)\n Floor \(userDefaults.integer(forKey: "floor"))"
+        Address.text = "Email : \(userDefaults.string(forKey: "email")!) \n Building Number: \(userDefaults.string(forKey: "buildingNumber")!)\n Street Name: \(userDefaults.string(forKey: "streetName")!)\n Zip Code: \(userDefaults.string(forKey: "zipCode")!)\n Floor: \(userDefaults.integer(forKey: "floor"))"
     
      //  print(userDefaults.string(forKey: "test"))
        

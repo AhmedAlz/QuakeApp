@@ -45,7 +45,7 @@ class MainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         threshold = userDefaults.double(forKey: "threshold")
         duration = userDefaults.double(forKey: "duration")
         
@@ -61,14 +61,14 @@ class MainVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.address.text = " Email : \(userDefaults.string(forKey: "email")!) \n Building Number: \(userDefaults.string(forKey: "buildingNumber")!)\n Street Name: \(userDefaults.string(forKey: "streetName")!)\n Zip Code \(userDefaults.string(forKey: "zipCode")!)\n Floor \(userDefaults.integer(forKey: "floor"))"
+        self.address.text = " Email : \(userDefaults.string(forKey: "email")!) \n Building Number: \(userDefaults.string(forKey: "buildingNumber")!)\n Street Name: \(userDefaults.string(forKey: "streetName")!)\n Zip Code: \(userDefaults.string(forKey: "zipCode")!)\n Floor: \(userDefaults.integer(forKey: "floor"))"
         
         self.settings.text = " Threshould = \((threshold * 100.0).rounded()/100)  m/s^2 \n Duration = \((duration * 100.0).rounded()/100) seconds"
         
         
         Clock.sync { date, offset in
             print(date?.timeIntervalSince1970 ?? 0.0)
-             self.startupdate()
+            self.startupdate()
         }
         
         
@@ -83,10 +83,10 @@ class MainVC: UIViewController {
         var t = [Any]()
         var readings = [Any]()
         
-
+        
         //var now  = NSDate().timeIntervalSince1970 ?? 0.0
         //print(now)
-
+        
         var now = Clock.now?.timeIntervalSince1970 ?? 0.0
         print(now)
         if manager.isAccelerometerAvailable {
@@ -97,21 +97,24 @@ class MainVC: UIViewController {
                 
                 self!.readings.text = "x: \((data!.acceleration.x * 9.80665 * 100.0).rounded()/100)\ny: \((data!.acceleration.y * 9.80665 * 100).rounded()/100.0) \nz: \((data!.acceleration.z * 9.80665 * 100.0).rounded()/100) \n time: \(Clock.now?.timeIntervalSince1970 ?? 0.0)"
                 
-                if (abs(data!.acceleration.z * 9.80665) > 8.0 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self?.threshold)!) && self!.counter == 1) || (self!.manualStart == true && self!.counter == 1) {
+                if (abs(data!.acceleration.z * 9.80665) > 8.0 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self!.threshold)) && self!.counter == 1) || (self!.manualStart == true && self!.counter == 1) {
                     self?.startRecording = true
+                    print("start")
+                    print(Clock.now?.timeIntervalSince1970 ?? 0.0)
                 }
                 
                 if self!.startRecording {
                     self!.manualStart = false
-                    if self!.counter == 1 {
-                        //now = NSDate().timeIntervalSince1970
-                        print(Clock.now?.timeIntervalSince1970 ?? 0.0)
-                        print("start")
-                    } else if self!.counter ==  (self!.duration * (1/self!.samplingRate )) - 2.0 {
-                        //now = NSDate().timeIntervalSince1970
-                        print(Clock.now?.timeIntervalSince1970 ?? 0.0)
-                        print("end")
-                    }
+                    
+                    //                    if self!.counter == 1 {
+                    //                        //now = NSDate().timeIntervalSince1970
+                    //                        print(Clock.now?.timeIntervalSince1970 ?? 0.0)
+                    //                        print("start")
+                    //                    } else if self!.counter ==  (self!.duration * (1/self!.samplingRate )) - 2.0 {
+                    //                        //now = NSDate().timeIntervalSince1970
+                    //                        print(Clock.now?.timeIntervalSince1970 ?? 0.0)
+                    //                        print("end")
+                    //                    }
                     
                     self!.counter = self!.counter + 1
                     if self!.counter < self!.duration * (1/self!.samplingRate ) {
@@ -121,6 +124,8 @@ class MainVC: UIViewController {
                         t.append(Clock.now?.timeIntervalSince1970 ?? 0.0)
                         
                     } else if self!.counter == self!.duration * (1/self!.samplingRate )  {
+                        print(Clock.now?.timeIntervalSince1970 ?? 0.0)
+                        print("end")
                         let readings = [  "x": x , "y": y , "z": z, "rtime": t]
                         let parameters: Parameters = ["deviceID": self!.emailAddress , "buildingNumber" : self!.buildingNumber ,"streetName" : self!.streetName ,"zipCode" : self!.zipCode ,"floor" : self!.floor, "x": x , "y": y , "z": z, "rtime": t, "reading" : readings]
                         // add an if statment to save the data in the device and try to send later if there is now internet connection at the time detection
@@ -129,6 +134,10 @@ class MainVC: UIViewController {
                                 print("Progress: \(progress.fractionCompleted)")
                                 print(Clock.now?.timeIntervalSince1970 ?? 0.0)
                                 print("sent")
+                                print(self!.duration)
+                                print("duration")
+                                print(self!.threshold)
+                                print("threshold")
                                 
                         }
                         
