@@ -13,7 +13,7 @@
         <!--Settings-->
         <scene sceneID="Lcd-A5-sDE">
             <objects>
-                <viewController id="2mY-4U-kRT" customClass="Settings" customModule="QuakeApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="settingsID" id="2mY-4U-kRT" customClass="Settings" customModule="QuakeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MdO-aq-c8J"/>
                         <viewControllerLayoutGuide type="bottom" id="GpZ-zY-zDz"/>
@@ -121,7 +121,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Wnx-U0-Mfn" kind="show" id="JPE-Xt-FTh"/>
+                                    <action selector="updateAdressPressed:" destination="3UJ-YJ-9Gw" eventType="touchUpInside" id="LK7-HJ-F0g"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBV-Dg-yTF">
@@ -152,7 +152,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2mY-4U-kRT" kind="show" id="234-3a-KqB"/>
+                                    <action selector="changeSettingPressed:" destination="3UJ-YJ-9Gw" eventType="touchUpInside" id="9Az-rM-jfO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -160,6 +160,7 @@
                         <viewLayoutGuide key="safeArea" id="VgD-n3-CnA"/>
                     </view>
                     <connections>
+                        <outlet property="UpdateAdressPressed" destination="GPt-Le-70h" id="Pdm-ZP-MD1"/>
                         <outlet property="address" destination="usC-0w-EKL" id="kjI-yG-b4Q"/>
                         <outlet property="readings" destination="dax-5a-927" id="EfX-1m-Kyg"/>
                         <outlet property="settings" destination="zBV-Dg-yTF" id="JNw-Sj-pEQ"/>
@@ -231,7 +232,7 @@
         <!--Update Address-->
         <scene sceneID="QvT-7l-Kx0">
             <objects>
-                <viewController id="Wnx-U0-Mfn" customClass="UpdateAddress" customModule="QuakeApp" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="updateAddressID" id="Wnx-U0-Mfn" customClass="UpdateAddress" customModule="QuakeApp" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mG4-0L-OHy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -328,7 +329,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Floor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Q9-87-TxU">
-                                <rect key="frame" x="16" y="273" width="165" height="21"/>
+                                <rect key="frame" x="16" y="273" width="135" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.21951845289999999" green="0.59873312710000004" blue="0.63620764019999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -353,7 +354,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="I2X-S2-E4F"/>
-        <segue reference="Sua-6b-woi"/>
+        <segue reference="Qwa-xc-03Y"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -157,6 +157,23 @@ class MainVC: UIViewController {
         }
         
     }
+    @IBAction func updateAdressPressed(_ sender: Any) {
+        if manager.isAccelerometerActive{
+        manager.stopAccelerometerUpdates()
+        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "updateAddressID")
+        self.present(vc, animated: true)
+    }
+    
+    @IBAction func changeSettingPressed(_ sender: Any) {
+        if manager.isAccelerometerActive{
+            manager.stopAccelerometerUpdates()
+        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "settingsID")
+        self.present(vc, animated: true)
+    }
     
     @IBAction func manualStartButton(_ sender: Any) {
         self.manualStart = true
