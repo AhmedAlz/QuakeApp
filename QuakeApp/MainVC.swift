@@ -10,19 +10,19 @@ import UIKit
 import CoreMotion
 import Kronos
 import Alamofire
+import CoreLocation
 
 
-class MainVC: UIViewController {
+class MainVC: UIViewController , CLLocationManagerDelegate {
     
     @IBOutlet weak var address: UILabel!
     @IBOutlet weak var settings: UILabel!
     @IBOutlet weak var readings: UILabel!
     
-    
+    var locationManager = CLLocationManager()
     let manager = CMMotionManager()
     
     let userDefaults = UserDefaults.standard
-    
     
     var threshold : Double = 0.6
     var duration : Double = 10
@@ -46,6 +46,13 @@ class MainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.requestAlwaysAuthorization()
+        locationManager.delegate = self
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        
         threshold = userDefaults.double(forKey: "threshold")
         duration = userDefaults.double(forKey: "duration")
         
@@ -57,6 +64,18 @@ class MainVC: UIViewController {
         
         // manager.stopAccelerometerUpdates()
     }
+    
+    
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let locValue:CLLocationCoordinate2D = manager.location?.coordinate {
+        
+            print("\(locValue.latitude)  \(locValue.longitude)")
+            
+        }
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -77,11 +96,11 @@ class MainVC: UIViewController {
     
     func startupdate()  {
         
-        var x = [Any]()
-        var y = [Any]()
-        var z = [Any]()
-        var t = [Any]()
-        var readings = [Any]()
+        var x = [Double]()
+        var y = [Double]()
+        var z = [Double]()
+        var t = [Double]()
+        var readings = [Double]()
         
         
         //var now  = NSDate().timeIntervalSince1970 ?? 0.0
@@ -163,6 +182,8 @@ class MainVC: UIViewController {
         
     }
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        manager.stopAccelerometerUpdates()
+    }
     
 }

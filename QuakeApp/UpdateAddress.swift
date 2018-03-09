@@ -9,7 +9,7 @@
 import UIKit
 
 class UpdateAddress: UIViewController {
-    let userDefaults =  UserDefaults.standard
+    let userDefaults = UserDefaults.standard
     
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var buildingNumber: UITextField!
@@ -23,9 +23,7 @@ class UpdateAddress: UIViewController {
         view.addGestureRecognizer(tap)
         
         super.viewDidLoad()
-
     }
-    
     
     @objc func dismissKeyboard() {
             view.endEditing(true)
@@ -50,14 +48,5 @@ class UpdateAddress: UIViewController {
         self.present(vc, animated: true)
         
     }
-    
-
-
-    
-    
-    
-    
-
-
 
 }
