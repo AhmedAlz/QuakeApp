@@ -26,6 +26,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
     
     var threshold : Double = 0.6
     var duration : Double = 10
+    var preTriggerDuration : Double = 5
     var counter : Double = 1
     var startRecording = false
     var manualStart = false
@@ -102,10 +103,10 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
         var t = [Double]()
         var readings = [Double]()
         
-        var preX = [Double](repeating: 0.0, count: Int(5/samplingRate))
-        var preY = [Double](repeating: 0.0, count: Int(5/samplingRate))
-        var preZ = [Double](repeating: 0.0, count: Int(5/samplingRate))
-        var preT = [Double](repeating: 0.0, count: Int(5/samplingRate))
+        var preX = [Double](repeating: 0.0, count: Int(preTriggerDuration/samplingRate))
+        var preY = [Double](repeating: 0.0, count: Int(preTriggerDuration/samplingRate))
+        var preZ = [Double](repeating: 0.0, count: Int(preTriggerDuration/samplingRate))
+        var preT = [Double](repeating: 0.0, count: Int(preTriggerDuration/samplingRate))
         
         //var now  = NSDate().timeIntervalSince1970 ?? 0.0
         //print(now)
@@ -121,7 +122,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                 
                 self!.readings.text = "x: \((data!.acceleration.x * 9.80665 * 100.0).rounded()/100)\ny: \((data!.acceleration.y * 9.80665 * 100).rounded()/100.0) \nz: \((data!.acceleration.z * 9.80665 * 100.0).rounded()/100) \n time: \(Clock.now?.timeIntervalSince1970 ?? 0.0)"
                 
-                if (abs(data!.acceleration.z * 9.80665) > 8.0 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self!.threshold)) && self!.counter == 1) || (self!.manualStart == true && self!.counter == 1) {
+                if (abs(data!.acceleration.z * 9.80665) > 8.0 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self!.threshold)) && self!.counter == 1)  && (Double(abs(preX.max()!)) < Double((self!.threshold))) && (Double(abs(preY.max()!)) < Double((self!.threshold))) || (self!.manualStart == true && self!.counter == 1) {
                     self?.startRecording = true
                     print("start")
                     print(Clock.now?.timeIntervalSince1970 ?? 0.0)
@@ -167,6 +168,11 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                         var TotalZ = preZ + z
                         var TotalT = preT + t
                         
+                        preX = Array(x.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+                        preY = Array(y.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+                        preZ = Array(z.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+                        preT = Array(t.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+                        
                         let readings = [  "x": x , "y": y , "z": z, "rtime": t]
                         let parameters: Parameters = ["deviceID": self!.emailAddress , "buildingNumber" : self!.buildingNumber ,"streetName" : self!.streetName ,"zipCode" : self!.zipCode ,"floor" : self!.floor, "x": TotalX , "y": TotalY , "z": TotalZ, "rtime": TotalT, "reading" : readings]
                         // add an if statment to save the data in the device and try to send later if there is now internet connection at the time detection
@@ -182,12 +188,16 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                                 
                         }
                         
+
+                        print(preX)
                         self!.counter  = 1
                         x = []
                         y = []
                         z = []
                         t = []
                         self!.startRecording = false
+                        
+                        
                         
                     }
                 }
