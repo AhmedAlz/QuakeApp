@@ -72,7 +72,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let locValue:CLLocationCoordinate2D = manager.location?.coordinate {
         
-            print("\(locValue.latitude)  \(locValue.longitude)")
+//            print("\(locValue.latitude)  \(locValue.longitude)")
             
         }
     }
@@ -112,8 +112,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
         var TotalY = [Double]()
         var TotalZ = [Double]()
         var TotalT = [Double]()
-        //var now  = NSDate().timeIntervalSince1970 ?? 0.0
-        //print(now)
+
         
         var now = Clock.now?.timeIntervalSince1970 ?? 0.0
         print(now)
@@ -131,6 +130,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                     print("start")
                     print(Clock.now?.timeIntervalSince1970 ?? 0.0)
                 }else{
+                    if  !(self?.startRecording)! {
                     preX.remove(at: 0)
                     preY.remove(at: 0)
                     preZ.remove(at: 0)
@@ -141,21 +141,12 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                     preZ.append(data!.acceleration.z * 9.80665)
                     preT.append(Clock.now?.timeIntervalSince1970 ?? 0.0)
                     
-                }
+                }}
                 
                 if self!.startRecording {
                     self!.manualStart = false
                     
-                    //                    if self!.counter == 1 {
-                    //                        //now = NSDate().timeIntervalSince1970
-                    //                        print(Clock.now?.timeIntervalSince1970 ?? 0.0)
-                    //                        print("start")
-                    //                    } else if self!.counter ==  (self!.duration * (1/self!.samplingRate )) - 2.0 {
-                    //                        //now = NSDate().timeIntervalSince1970
-                    //                        print(Clock.now?.timeIntervalSince1970 ?? 0.0)
-                    //                        print("end")
-                    //                    }
-                    
+
                     self!.counter = self!.counter + 1
                     if self!.counter < self!.duration * (1/self!.samplingRate ) {
                         x.append(data!.acceleration.x * 9.80665)
@@ -172,10 +163,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                          TotalZ = preZ + z
                          TotalT = preT + t
                         
-                        preX = Array(x.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
-                        preY = Array(y.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
-                        preZ = Array(z.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
-                        preT = Array(t.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+
                         
                         let readings = [  "x": x , "y": y , "z": z, "rtime": t]
                         let parameters: Parameters = ["deviceID": self!.emailAddress , "buildingNumber" : self!.buildingNumber ,"streetName" : self!.streetName ,"zipCode" : self!.zipCode ,"floor" : self!.floor, "x": TotalX , "y": TotalY , "z": TotalZ, "rtime": TotalT, "reading" : readings]
@@ -192,8 +180,11 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                                 
                         }
                         
-
-                        print(preX)
+                        preX = Array(x.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+                        preY = Array(y.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+                        preZ = Array(z.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+                        preT = Array(t.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+//                            print(preX)
                         self!.counter  = 1
                         x = []
                         y = []

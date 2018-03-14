@@ -1,0 +1,15 @@
+PODS:
+  - Alamofire (4.6.0)
+  - Kronos (1.0.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - Kronos
+
+SPEC CHECKSUMS:
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  Kronos: 3bc3f4e60b03a6cd9767e9e06b2b1fd20377a652
+
+PODFILE CHECKSUM: 6697e36af5ca71b0c038ac7ed806f8774a4c1259
+
+COCOAPODS: 1.4.0
