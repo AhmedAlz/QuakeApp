@@ -108,6 +108,10 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
         var preZ = [Double](repeating: 0.0, count: Int(preTriggerDuration/samplingRate))
         var preT = [Double](repeating: 0.0, count: Int(preTriggerDuration/samplingRate))
         
+        var TotalX = [Double]()
+        var TotalY = [Double]()
+        var TotalZ = [Double]()
+        var TotalT = [Double]()
         //var now  = NSDate().timeIntervalSince1970 ?? 0.0
         //print(now)
         
@@ -163,10 +167,10 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                         print(Clock.now?.timeIntervalSince1970 ?? 0.0)
                         print("end")
                         
-                        var TotalX = preX + x
-                        var TotalY = preY + y
-                        var TotalZ = preZ + z
-                        var TotalT = preT + t
+                         TotalX = preX + x
+                         TotalY = preY + y
+                         TotalZ = preZ + z
+                         TotalT = preT + t
                         
                         preX = Array(x.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
                         preY = Array(y.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))

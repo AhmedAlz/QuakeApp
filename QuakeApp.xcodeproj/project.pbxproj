@@ -16,6 +16,7 @@
 		E21A2730202DBEBD00885FC9 /* UpdateAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21A272F202DBEBD00885FC9 /* UpdateAddress.swift */; };
 		E21A2732202DBEE600885FC9 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21A2731202DBEE600885FC9 /* WelcomeVC.swift */; };
 		E21A2734202DBFB300885FC9 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21A2733202DBFB300885FC9 /* MainVC.swift */; };
+		E266E06C205874A300B092AE /* WebSiteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E266E06B205874A300B092AE /* WebSiteVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		E21A272F202DBEBD00885FC9 /* UpdateAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAddress.swift; sourceTree = "<group>"; };
 		E21A2731202DBEE600885FC9 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		E21A2733202DBFB300885FC9 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		E266E06B205874A300B092AE /* WebSiteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSiteVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				E21A2726202D289500885FC9 /* LaunchScreen.storyboard */,
 				E21A2729202D289500885FC9 /* Info.plist */,
 				E21A272F202DBEBD00885FC9 /* UpdateAddress.swift */,
+				E266E06B205874A300B092AE /* WebSiteVC.swift */,
 				E21A2731202DBEE600885FC9 /* WelcomeVC.swift */,
 				E21A2733202DBFB300885FC9 /* MainVC.swift */,
 			);
@@ -235,6 +238,7 @@
 			files = (
 				E21A2730202DBEBD00885FC9 /* UpdateAddress.swift in Sources */,
 				E21A2734202DBFB300885FC9 /* MainVC.swift in Sources */,
+				E266E06C205874A300B092AE /* WebSiteVC.swift in Sources */,
 				E21A2720202D289500885FC9 /* Settings.swift in Sources */,
 				E21A2732202DBEE600885FC9 /* WelcomeVC.swift in Sources */,
 				E21A271E202D289500885FC9 /* AppDelegate.swift in Sources */,
