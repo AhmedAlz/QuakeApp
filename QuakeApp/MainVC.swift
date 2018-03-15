@@ -26,7 +26,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
     
     var threshold : Double = 0.6
     var duration : Double = 10
-    var preTriggerDuration : Double = 5
+    var preTriggerDuration : Double = 1
     var counter : Double = 1
     var startRecording = false
     var manualStart = false
@@ -157,12 +157,16 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                     } else if self!.counter == self!.duration * (1/self!.samplingRate )  {
                         print(Clock.now?.timeIntervalSince1970 ?? 0.0)
                         print("end")
-                        
+                         print(preX)
+                         print(x)
+                        print(TotalX)
                          TotalX = preX + x
                          TotalY = preY + y
                          TotalZ = preZ + z
                          TotalT = preT + t
-                        
+                        print(preX)
+                        print(x)
+                        print(TotalX)
 
                         
                         let readings = [  "x": x , "y": y , "z": z, "rtime": t]
@@ -184,12 +188,17 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                         preY = Array(y.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
                         preZ = Array(z.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
                         preT = Array(t.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
-//                            print(preX)
+                        print(preX)
                         self!.counter  = 1
                         x = []
                         y = []
                         z = []
                         t = []
+                        
+                        TotalX = []
+                        TotalY = []
+                        TotalZ = []
+                        TotalT = []
                         self!.startRecording = false
                         
                         
