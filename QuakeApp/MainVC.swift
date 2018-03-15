@@ -26,7 +26,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
     
     var threshold : Double = 0.6
     var duration : Double = 10
-    var preTriggerDuration : Double = 1
+    var preTriggerDuration : Double = 2
     var counter : Double = 1
     var startRecording = false
     var manualStart = false
@@ -113,6 +113,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
         var TotalZ = [Double]()
         var TotalT = [Double]()
 
+        var lastT: Double = 0.0
         
         var now = Clock.now?.timeIntervalSince1970 ?? 0.0
         print(now)
@@ -124,8 +125,8 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
 
                 
                 self!.readings.text = "x: \((data!.acceleration.x * 9.80665 * 100.0).rounded()/100)\ny: \((data!.acceleration.y * 9.80665 * 100).rounded()/100.0) \nz: \((data!.acceleration.z * 9.80665 * 100.0).rounded()/100) \n time: \(Clock.now?.timeIntervalSince1970 ?? 0.0)"
-                
-                if (abs(data!.acceleration.z * 9.80665) > 8.0 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self!.threshold)) && self!.counter == 1) || (self!.manualStart == true && self!.counter == 1) {
+                now = Clock.now?.timeIntervalSince1970 ?? 0.0
+                if ((abs(data!.acceleration.z * 9.80665) > 8.0 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self!.threshold)) && self!.counter == 1) && (now > (lastT + (self?.preTriggerDuration)!))) || (self!.manualStart == true && self!.counter == 1) {
                     self?.startRecording = true
                     print("start")
                     print(Clock.now?.timeIntervalSince1970 ?? 0.0)
@@ -160,10 +161,17 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                          print(preX)
                          print(x)
                         print(TotalX)
-                         TotalX = preX + x
-                         TotalY = preY + y
-                         TotalZ = preZ + z
-                         TotalT = preT + t
+                        
+                        TotalX.append(contentsOf: preX)
+                        TotalY.append(contentsOf: preY)
+                        TotalZ.append(contentsOf: preZ)
+                        TotalT.append(contentsOf: preT)
+                        
+                        TotalX.append(contentsOf: x)
+                        TotalY.append(contentsOf: y)
+                        TotalZ.append(contentsOf: z)
+                        TotalT.append(contentsOf: t)
+
                         print(preX)
                         print(x)
                         print(TotalX)
@@ -184,12 +192,14 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                                 
                         }
                         
-                        preX = Array(x.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
-                        preY = Array(y.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
-                        preZ = Array(z.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
-                        preT = Array(t.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+//                        preX = Array(x.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+//                        preY = Array(y.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+//                        preZ = Array(z.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
+//                        preT = Array(t.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
                         print(preX)
                         self!.counter  = 1
+                        
+                        lastT = t.last!
                         x = []
                         y = []
                         z = []
