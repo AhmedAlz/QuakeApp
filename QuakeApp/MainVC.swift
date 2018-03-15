@@ -5,7 +5,6 @@
 //  Created by Ahmed on 2/9/18.
 //  Copyright © 2018 Ahmed. All rights reserved.
 //
-
 import UIKit
 import CoreMotion
 import Kronos
@@ -26,7 +25,6 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
     
     var threshold : Double = 0.6
     var duration : Double = 10
-    var preTriggerDuration : Double = 5
     var counter : Double = 1
     var startRecording = false
     var manualStart = false
@@ -71,8 +69,8 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let locValue:CLLocationCoordinate2D = manager.location?.coordinate {
-        
-//            print("\(locValue.latitude)  \(locValue.longitude)")
+            
+            print("\(locValue.latitude)  \(locValue.longitude)")
             
         }
     }
@@ -103,16 +101,9 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
         var t = [Double]()
         var readings = [Double]()
         
-        var preX = [Double](repeating: 0.0, count: Int(preTriggerDuration/samplingRate))
-        var preY = [Double](repeating: 0.0, count: Int(preTriggerDuration/samplingRate))
-        var preZ = [Double](repeating: 0.0, count: Int(preTriggerDuration/samplingRate))
-        var preT = [Double](repeating: 0.0, count: Int(preTriggerDuration/samplingRate))
         
-        var TotalX = [Double]()
-        var TotalY = [Double]()
-        var TotalZ = [Double]()
-        var TotalT = [Double]()
-
+        //var now  = NSDate().timeIntervalSince1970 ?? 0.0
+        //print(now)
         
         var now = Clock.now?.timeIntervalSince1970 ?? 0.0
         print(now)
@@ -120,8 +111,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
             manager.accelerometerUpdateInterval = samplingRate
             manager.startAccelerometerUpdates(to: OperationQueue.main) {
                 [weak self] data, error in
-            
-
+                //now = now + self!.samplingRate
                 
                 self!.readings.text = "x: \((data!.acceleration.x * 9.80665 * 100.0).rounded()/100)\ny: \((data!.acceleration.y * 9.80665 * 100).rounded()/100.0) \nz: \((data!.acceleration.z * 9.80665 * 100.0).rounded()/100) \n time: \(Clock.now?.timeIntervalSince1970 ?? 0.0)"
                 
@@ -129,24 +119,21 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                     self?.startRecording = true
                     print("start")
                     print(Clock.now?.timeIntervalSince1970 ?? 0.0)
-                }else{
-                    if  !(self?.startRecording)! {
-                    preX.remove(at: 0)
-                    preY.remove(at: 0)
-                    preZ.remove(at: 0)
-                    preT.remove(at: 0)
-                    
-                    preX.append(data!.acceleration.x * 9.80665)
-                    preY.append(data!.acceleration.y * 9.80665)
-                    preZ.append(data!.acceleration.z * 9.80665)
-                    preT.append(Clock.now?.timeIntervalSince1970 ?? 0.0)
-                    
-                }}
+                }
                 
                 if self!.startRecording {
                     self!.manualStart = false
                     
-
+                    //                    if self!.counter == 1 {
+                    //                        //now = NSDate().timeIntervalSince1970
+                    //                        print(Clock.now?.timeIntervalSince1970 ?? 0.0)
+                    //                        print("start")
+                    //                    } else if self!.counter ==  (self!.duration * (1/self!.samplingRate )) - 2.0 {
+                    //                        //now = NSDate().timeIntervalSince1970
+                    //                        print(Clock.now?.timeIntervalSince1970 ?? 0.0)
+                    //                        print("end")
+                    //                    }
+                    
                     self!.counter = self!.counter + 1
                     if self!.counter < self!.duration * (1/self!.samplingRate ) {
                         x.append(data!.acceleration.x * 9.80665)
@@ -157,16 +144,8 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                     } else if self!.counter == self!.duration * (1/self!.samplingRate )  {
                         print(Clock.now?.timeIntervalSince1970 ?? 0.0)
                         print("end")
-                        
-                         TotalX = preX + x
-                         TotalY = preY + y
-                         TotalZ = preZ + z
-                         TotalT = preT + t
-                        
-
-                        
                         let readings = [  "x": x , "y": y , "z": z, "rtime": t]
-                        let parameters: Parameters = ["deviceID": self!.emailAddress , "buildingNumber" : self!.buildingNumber ,"streetName" : self!.streetName ,"zipCode" : self!.zipCode ,"floor" : self!.floor, "x": TotalX , "y": TotalY , "z": TotalZ, "rtime": TotalT, "reading" : readings]
+                        let parameters: Parameters = ["deviceID": self!.emailAddress , "buildingNumber" : self!.buildingNumber ,"streetName" : self!.streetName ,"zipCode" : self!.zipCode ,"floor" : self!.floor, "x": x , "y": y , "z": z, "rtime": t, "reading" : readings]
                         // add an if statment to save the data in the device and try to send later if there is now internet connection at the time detection
                         Alamofire.request(self!.url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
                             .downloadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
@@ -180,19 +159,12 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                                 
                         }
                         
-                        preX = Array(x.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
-                        preY = Array(y.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
-                        preZ = Array(z.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
-                        preT = Array(t.suffix(Int(self!.preTriggerDuration/self!.samplingRate)))
-//                            print(preX)
                         self!.counter  = 1
                         x = []
                         y = []
                         z = []
                         t = []
                         self!.startRecording = false
-                        
-                        
                         
                     }
                 }
