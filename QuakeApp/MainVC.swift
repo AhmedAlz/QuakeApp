@@ -126,7 +126,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                 
                 self!.readings.text = "x: \((data!.acceleration.x * 9.80665 * 100.0).rounded()/100)\ny: \((data!.acceleration.y * 9.80665 * 100).rounded()/100.0) \nz: \((data!.acceleration.z * 9.80665 * 100.0).rounded()/100) \n time: \(Clock.now?.timeIntervalSince1970 ?? 0.0)"
                 now = Clock.now?.timeIntervalSince1970 ?? 0.0
-                if ((abs(data!.acceleration.z * 9.80665) > 8.0 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self!.threshold)) && self!.counter == 1) && (now > (lastT + (self?.preTriggerDuration)!))) || (self!.manualStart == true && self!.counter == 1) {
+                if ((abs(data!.acceleration.z * 9.80665) > 8.0 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self!.threshold)) && self!.counter == 1) && (now > (lastT + (self?.preTriggerDuration)! + 1))) || (self!.manualStart == true && self!.counter == 1) {
                     self?.startRecording = true
                     print("start")
                     print(Clock.now?.timeIntervalSince1970 ?? 0.0)
