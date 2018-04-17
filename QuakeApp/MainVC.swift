@@ -115,9 +115,9 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
 
         var lastT: Double = 0.0
         
-        let snow = NSDate();
+       
         
-        var now = snow.timeIntervalSince1970
+        var now = NSDate().timeIntervalSince1970
 //        var now = Clock.now?.timeIntervalSince1970 ?? 0.0
         print(now)
         if manager.isAccelerometerAvailable {
@@ -127,12 +127,12 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
             
 
                 
-                self!.readings.text = "x: \((data!.acceleration.x * 9.80665 * 100.0).rounded()/100)\ny: \((data!.acceleration.y * 9.80665 * 100).rounded()/100.0) \nz: \((data!.acceleration.z * 9.80665 * 100.0).rounded()/100) \n time: \(snow.timeIntervalSince1970)"
-                now = snow.timeIntervalSince1970
+                self!.readings.text = "x: \((data!.acceleration.x * 9.80665 * 100.0).rounded()/100)\ny: \((data!.acceleration.y * 9.80665 * 100).rounded()/100.0) \nz: \((data!.acceleration.z * 9.80665 * 100.0).rounded()/100) \n time: \(NSDate().timeIntervalSince1970)"
+                now = NSDate().timeIntervalSince1970
                 if ((abs(data!.acceleration.z * 9.80665) > 8.0 && sqrt(pow(data!.acceleration.x * 9.80665,2) + pow(data!.acceleration.y * 9.80665,2)) > Double((self!.threshold)) && self!.counter == 1) && (now > (lastT + (self?.preTriggerDuration)! + 1))) || (self!.manualStart == true && self!.counter == 1) {
                     self?.startRecording = true
                     print("start")
-                    print(snow.timeIntervalSince1970)
+                    print(NSDate().timeIntervalSince1970)
                 }else{
                     if  !(self?.startRecording)! {
                     preX.remove(at: 0)
@@ -143,7 +143,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                     preX.append(data!.acceleration.x * 9.80665)
                     preY.append(data!.acceleration.y * 9.80665)
                     preZ.append(data!.acceleration.z * 9.80665)
-                    preT.append(snow.timeIntervalSince1970)
+                    preT.append(NSDate().timeIntervalSince1970)
                     
                 }}
                 
@@ -156,10 +156,10 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                         x.append(data!.acceleration.x * 9.80665)
                         y.append(data!.acceleration.y * 9.80665)
                         z.append(data!.acceleration.z * 9.80665)
-                        t.append(snow.timeIntervalSince1970)
+                        t.append(NSDate().timeIntervalSince1970)
                         
                     } else if self!.counter == self!.duration * (1/self!.samplingRate )  {
-                        print(snow.timeIntervalSince1970)
+                        print(NSDate().timeIntervalSince1970)
                         print("end")
                          print(preX)
                          print(x)
@@ -186,7 +186,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
                         Alamofire.request(self!.url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
                             .downloadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
                                 print("Progress: \(progress.fractionCompleted)")
-                                print(snow.timeIntervalSince1970)
+                                print(NSDate().timeIntervalSince1970)
                                 print("sent")
                                 print(self!.duration)
                                 print("duration")
