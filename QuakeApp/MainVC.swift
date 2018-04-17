@@ -26,7 +26,7 @@ class MainVC: UIViewController , CLLocationManagerDelegate {
     
     var threshold : Double = 0.6
     var duration : Double = 10
-    var preTriggerDuration : Double = 2
+    var preTriggerDuration : Double = 0
     var counter : Double = 1
     var startRecording = false
     var manualStart = false
